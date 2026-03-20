@@ -1,8 +1,7 @@
-import { state } from "../state.js";    
-import { emptyHTML } from "../ui/helpers.js";
+import { state } from "../state.js"; 
 import { colorFor } from "./render.js";
 import { fetchSeasons } from './fetch.js';
-import { renderDetailMatches, loadDetailMatches } from './seasons.js';
+import {  loadDetailMatches ,renderDetailMatches} from './seasons.js';
 
 export function openCompetition(comp) {
     state.currentCompetition = comp;
@@ -39,16 +38,17 @@ export function openCompetition(comp) {
 
 export function onSeasonChange() {
   state.currentSeasonId = document.getElementById('season-select').value;
+  state.allDetailMatches = [];
   loadDetailMatches();
 }
 
 export function setDetailTab(tab, btn) {
     state.currentDetailTab = tab;
+    state.allDetailMatches= [];
     document.querySelectorAll('.detail-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    renderDetailMatches();
+    loadDetailMatches();
 }
-
 
 
 export function backToCompetitions() {
