@@ -18,25 +18,25 @@ document.getElementById('current-date').textContent =
   });
 document.getElementById('date-picker').value = todayStr;
  
-// ─── Config bar ───────────────────────────────────────────
+//Config bar 
 document.getElementById('btn-load').addEventListener('click', fetchMatches);
 document.getElementById('date-picker').addEventListener('change', fetchMatches);
 document.getElementById('btn-auto').addEventListener('click', toggleLive);
  
-// ─── Nav tabs ─────────────────────────────────────────────
+// Nav tabs 
 document.querySelectorAll('.nav-tab').forEach(btn => {
   btn.addEventListener('click', () => showPage(btn.dataset.page, btn));
 });
  
-// ─── Match filter buttons ─────────────────────────────────
+//  Match filter buttons 
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => setFilter(btn.dataset.filter, btn));
 });
  
-// ─── Competition search ───────────────────────────────────
+//Competition search 
 document.getElementById('comp-search').addEventListener('input', filterCompetitions);
  
-// ─── Competition card clicks (event delegation) ───────────
+//  Competition card clicks 
 document.getElementById('comp-grid').addEventListener('click', e => {
   const card = e.target.closest('.comp-card');
   if (!card) return;
@@ -44,13 +44,13 @@ document.getElementById('comp-grid').addEventListener('click', e => {
   openCompetition(comp);
 });
  
-// ─── Detail: back button ──────────────────────────────────
+//Detail: back button 
 document.getElementById('btn-back').addEventListener('click', backToCompetitions);
  
-// ─── Detail: season selector ──────────────────────────────
+// Detail: season selector
 document.getElementById('season-select').addEventListener('change', onSeasonChange);
  
-// ─── Detail: tab buttons ──────────────────────────────────
+//  Detail: tab buttons 
 document.querySelectorAll('.detail-tab').forEach(btn => {
   btn.addEventListener('click', () => setDetailTab(btn.dataset.tab, btn));
 });
