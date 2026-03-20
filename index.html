@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Football Live Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="index.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+ 
+   <header>
+    <div class="logo">
+      <div class="logo-icon">⚽</div>
+      <div>
+        <h1>FOOTBALL <span>LIVE</span></h1>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px;">SportRadar Dashboard</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="date-label">Fecha actual</div>
+      <div id="current-date">—</div>
+    </div>
+  </header>
+ 
+  <div class="config-bar">
+    <label for="date-picker">Fecha</label>
+    <input
+      type="date"
+      id="date-picker"
+      style="flex:1;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:8px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;"
+    />
+    <button class="btn" id="btn-load">Cargar partidos</button>
+    <button class="btn btn-outline" id="btn-auto">⟳ Auto</button>
+  </div>
+ 
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-page="matches">⚽ Partidos</button>
+    <button class="nav-tab" data-page="competitions">🏆 Competencias</button>
+  </div>
+ 
+  <div id="page-matches" class="page active">
+ 
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-label">Total partidos</div>
+        <div class="stat-value accent" id="stat-total">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">En vivo</div>
+        <div class="stat-value red" id="stat-live">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Finalizados</div>
+        <div class="stat-value" id="stat-ended">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Programados</div>
+        <div class="stat-value amber" id="stat-scheduled">—</div>
+      </div>
+    </div>
+ 
+    <div class="controls">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="live">🔴 En vivo</button>
+      <button class="filter-btn" data-filter="ended">Finalizados</button>
+      <button class="filter-btn" data-filter="scheduled">Programados</button>
+    </div>
+ 
+    <div class="table-container">
+      <div class="table-header">
+        <div>Partido</div>
+        <div class="hide-mobile" style="text-align:center;">Marcador</div>
+        <div style="text-align:center;">Estado</div>
+        <div class="hide-mobile" style="text-align:center;">Min.</div>
+        <div class="hide-mobile">Competición</div>
+      </div>
+      <div id="matches-body">
+        <div class="empty-state">
+          <div class="empty-icon">⚽</div>
+          Selecciona una fecha y presiona <strong>Cargar partidos</strong>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="refresh-bar">
+      <div class="refresh-dot"></div>
+      <span>Última actualización: <span id="last-updated">—</span></span>
+    </div>
+ 
+  </div>
+  <div id="page-competitions" class="page">
+ 
+    <div id="comp-list-view">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="comp-search" placeholder="Buscar competencia o país..."/>
+      </div>
+      <div class="comp-count" id="comp-count">—</div>
+      <div class="comp-grid" id="comp-grid">
+        <div class="empty-state" style="grid-column:1/-1">
+          <div class="empty-icon">🏆</div>
+          Cambia a esta pestaña para cargar las competencias
+        </div>
+      </div>
+    </div>
+ 
+    <div id="comp-detail-view" style="display:none;">
+      <button class="btn-ghost" id="btn-back" style="margin-bottom:1.25rem;">
+        ← Volver a competencias
+      </button>
+      <div class="detail-panel">
+        <div class="detail-header">
+          <div class="detail-icon" id="detail-icon">?</div>
+          <div>
+            <div class="detail-title" id="detail-title">—</div>
+            <div class="detail-sub" id="detail-sub">—</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:1.25rem;">
+          <select class="season-selector" id="season-select">
+            <option>Cargando temporadas...</option>
+          </select>
+          <div class="detail-tabs" style="margin-bottom:0;">
+            <button class="detail-tab active" data-tab="live">🔴 En vivo</button>
+            <button class="detail-tab" data-tab="upcoming">📅 Próximos</button>
+            <button class="detail-tab" data-tab="results">✅ Resultados</button>
+          </div>
+        </div>
+        <div class="table-container">
+          <div class="table-header">
+            <div>Partido</div>
+            <div class="hide-mobile" style="text-align:center;">Marcador</div>
+            <div style="text-align:center;">Estado</div>
+            <div class="hide-mobile" style="text-align:center;">Min.</div>
+            <div class="hide-mobile">Fecha</div>
+          </div>
+          <div id="detail-body">
+            <div class="loading-state"><div class="spinner"></div>Cargando...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+  </div>
+</div>
+<script type="module" defer src="js/main.js"></script>
+</body>
+</html>
