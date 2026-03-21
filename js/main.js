@@ -43,14 +43,19 @@ document.getElementById('comp-grid').addEventListener('click', e => {
   const comp = JSON.parse(decodeURIComponent(card.dataset.comp));
   openCompetition(comp);
 });
- 
+
 //Detail: back button 
 document.getElementById('btn-back').addEventListener('click', backToCompetitions);
- 
+
 // Detail: season selector
 document.getElementById('season-select').addEventListener('change', onSeasonChange);
- 
+
 //  Detail: tab buttons 
 document.querySelectorAll('.detail-tab').forEach(btn => {
   btn.addEventListener('click', () => setDetailTab(btn.dataset.tab, btn));
 });
+
+window.toggleLeague = function(groupId){
+  const el = document.getElementById(groupId);
+  if (el) el.classList.toggle('open');
+}

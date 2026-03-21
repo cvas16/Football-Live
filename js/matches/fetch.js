@@ -9,11 +9,34 @@ export async function fetchMatches() {
 
     const fecha = document.getElementById('date-picker').value || todayStr;
     try {
-        const res = await fetch(`${BASE}/schedules/${fecha}/summaries`);
-        if (!res.ok) { showMatchesError(res.status); return; }
+        const [dayRes, LiveRes] = await Promise.all([
+            fetch(`${BASE}/schedules/${fecha}/summaries`),
+            fetch(`${BASE}/schedules/live/summaries`),
+        ]);
 
-        const data = await res.json();
-        state.allMatches = data.summaries ?? data.results ?? [];
+        if(!dayRes.ok) {showMatchesError(dayRes.status); return;}
+
+        const dayData = await dayRes.json();
+        const dayList = dayData.summaries ?? dayData.results ?? [];
+
+        const liveMap = new Map();
+        if(LiveRes.ok){
+            const liveData = await LiveRes.json();
+            for(const m of (liveData.summaries ?? [])){
+                liveMap.set(m.sport_event?.id,m)
+            }
+        }
+
+        state.allMatches = dayList.map(m => {
+            const id = m.sport_event?.id;
+            const liveVer = liveMap.get(id);
+            return liveVer ?? m;
+        });
+
+        for(const [id,liveMatch] of liveMap){
+            const alreadyIn = state.allMatches.some(m => m.sport_event?.id === id);
+            if(!alreadyIn) state.allMatches.push(liveMatch);
+        }
 
         updateStats();
         renderMatches();
