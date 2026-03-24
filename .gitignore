@@ -1,2 +1,14 @@
+# Dependencias
 node_modules/
+ 
+# Variables de entorno
 .env
+.env.local
+.env.production
+ 
+# Vercel
+.vercel
+ 
+# OS
+.DS_Store
+Thumbs.db

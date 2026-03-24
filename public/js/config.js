@@ -1,4 +1,4 @@
-export const BASE = 'http://localhost:3001/api';
+export const BASE = '/api/proxy?path=';
 
 export const LIVE_S = ['started','live','1st_half','2nd_half','halftime','overtime','1st_extra','2nd_extra','extra_time_halftime','awaiting_extra_time','awaiting_penalties','penalties','interrupted','suspended'];
 

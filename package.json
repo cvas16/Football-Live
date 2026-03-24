@@ -1,19 +1,17 @@
 {
-  "name": "api_futbol",
+  "name": "football-dashboard",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+  "type": "module",
+  "description": "Football Live Dashboard powered by SportRadar",
+  "private": true,
+  "engines": {
+    "node": ">=20"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "bootstrap-icons": "^1.13.1",
-    "dotenv": "^17.3.1",
-    "express": "^5.2.1",
-    "node-fetch": "^2.7.0"
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "devDependencies": {
+    "vercel": "^37.0.0"
   }
 }
